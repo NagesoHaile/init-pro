@@ -39,7 +39,7 @@ void initProject() {
 
   final apiHelper = File('${helperDir.path}/api_helper.dart');
   apiHelper.writeAsString('''
-     Class ApiHelper {
+     class ApiHelper {
       // Your API helper methods here
      }
 ''');
@@ -48,7 +48,7 @@ void initProject() {
 
   final validators = File('${helperDir.path}/validators.dart');
   validators.writeAsString('''
-    Class Validators {
+    class Validators {
       static String? validateEmail(String email){
         if(email.isEmpty) return 'Email is required.';
          final regex = RegExp(r'^\\S+@\\S+\\.\\S+\$');
