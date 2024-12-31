@@ -35,7 +35,7 @@ void main(List<String> arguments) {
     print('Error: $e');
     print('Use --help for usage instructions.');
   }
-  print('Hello world: ${init_pro.calculate()}!');
+  print('${init_pro.success()}!');
 }
 
 void _handleInitCommand(ArgResults args) {

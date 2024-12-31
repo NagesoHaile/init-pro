@@ -1,3 +1,3 @@
-int calculate() {
-  return 6 * 7;
+String success() {
+  return 'Completed Successfully.';
 }
