@@ -2,7 +2,8 @@ import 'package:init_pro/init_pro.dart' as init_pro;
 import 'dart:io';
 import 'package:args/args.dart';
 
-import '../lib/commands/init_command.dart';
+import 'package:init_pro/commands/init_command.dart';
+import 'package:init_pro/commands/create_feature_command.dart';
 
 void main(List<String> arguments) {
   final parser = ArgParser()
@@ -43,7 +44,13 @@ void _handleInitCommand(ArgResults args) {
 }
 
 void _handleCreateCommand(ArgResults args) {
-  print('Creating feature...');
+  if (args.rest.isEmpty) {
+    print('Error: Please provide a feature name.');
+    return;
+  }
+  final featureName = args.rest[0];
+  print('Creating feature $featureName...');
+  createFeature(featureName);
 }
 
 void _handleAddCommand(ArgResults args) {
