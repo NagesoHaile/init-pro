@@ -3,7 +3,7 @@ description: >
   A command-line tool for Flutter projects to generate boilerplate code 
   and clean architecture setup.
 
-version: 0.2.0
+version: 0.3.0
 
 environment:
   sdk: ^3.5.0
