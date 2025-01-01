@@ -1,6 +1,7 @@
 import 'dart:io';
+import '../commands/add_dependencies.dart';
 
-void initProject() {
+void initProject() async {
   final currentDir = Directory.current;
 
   // check if pubspec.yaml exists
@@ -17,6 +18,14 @@ void initProject() {
     print(
         'Error: lib/ directory not found. Please run this command inside a Flutter project.');
     exit(1);
+  }
+  await addDependencies(currentDir.path);
+  final result = await Process.run('flutter', ['pub', 'get'],
+      workingDirectory: currentDir.path);
+  if (result.exitCode == 0) {
+    print('Dependencies installed successfully!');
+  } else {
+    print('Error while running flutter pub get: ${result.stderr}');
   }
 
   // create main.dart file with the necessary setup
