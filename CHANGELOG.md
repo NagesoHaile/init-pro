@@ -9,3 +9,5 @@
 ## 0.2.0
 - added feature to add dependencies to the project `pubspec.yaml`.
 
+## 0.3.0
+- doc update.
