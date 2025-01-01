@@ -17,4 +17,4 @@ dart pub global activate init_pro
 init_pro init
 
 # Add a feature
-init_pro create_feature feature_name
+init_pro create feature_name
