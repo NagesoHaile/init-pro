@@ -19,19 +19,156 @@ void initProject() {
     exit(1);
   }
 
-  // create a clean architecture folders
-  final dataDir = Directory('${libDir.path}/data');
-  final domainDir = Directory('${libDir.path}/domain');
-  final presentationDir = Directory('${libDir.path}/presentation');
+  // create main.dart file with the necessary setup
+  final mainFile = File('lib/main.dart');
+  mainFile.createSync(recursive: true);
+  mainFile.writeAsStringSync('''
+import 'dart:async';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'app.dart';
+import 'core/utils/bloc_observer.dart';
+import 'dependency_injector.dart';
 
-  dataDir.createSync(recursive: true);
-  domainDir.createSync(recursive: true);
-  presentationDir.createSync(recursive: true);
+FutureOr<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  // Ensure that the dependencies are initialized
+  await initializeDependencies();
+  Bloc.observer = MyAppBlocObserver();
+  runApp(const App());
+}
+''');
 
+  print('main.dart file re-written successfully.');
+
+  // Create app.dart file with MaterialApp.router
+
+  final appFile = File('lib/app.dart');
+
+  appFile.createSync(recursive: true);
+
+  appFile.writeAsStringSync('''
+import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'core/theme/theme.dart';
+import 'router.dart';
+
+
+class App extends StatelessWidget  {
+  const App({super.key});
+
+  @override
+  Widget build(BuildContext context){
+    return Material.router(
+      dartTheme: Style.dark,
+      theme: Style.light,
+      routerConfig:router,
+      debugShowCheckedModeBanner: false,
+    );
+  }
+}
+''');
+  print('app.dart file created successfully.');
+
+  print('app_router.dart file created successfully.');
+  // add dependency_injector.dart file
+  _createFile(libDir.path, "dependency_injector.dart", '''
+    // if you want to use this code, please first add 
+    // get_it package to your project by running
+    // flutter pub add get_it
+    import 'package:get_it/get_it.dart';
+
+    final sl = GetIt.instance;
+
+    Future<void> initializeDependencies() async {
+      // register your dependencies here...
+    }
+''');
+
+  final featureDir = Directory('${libDir.path}/features');
+
+  featureDir.createSync(recursive: true);
   print('Clean architecture folder structure created');
-  print('  - lib/data');
-  print('  - lib/domain');
-  print('  - lib/presentation');
+  print('  - lib/features');
+
+  // create config folder
+  final configDir = Directory('${libDir.path}/config');
+  configDir.createSync(recursive: true);
+  // create sub-folders for config
+  Directory('${configDir.path}/route').createSync(recursive: true);
+  Directory('${configDir.path}/theme').createSync(recursive: true);
+  // create core folder
+  final coreDir = Directory('${libDir.path}/core');
+  coreDir.createSync(recursive: true);
+  // create sub-folders for core
+  Directory('${coreDir.path}/assets').createSync(recursive: true);
+  Directory('${coreDir.path}/colors').createSync(recursive: true);
+  Directory('${coreDir.path}/database').createSync(recursive: true);
+  Directory('${coreDir.path}/network').createSync(recursive: true);
+  Directory('${coreDir.path}/resources').createSync(recursive: true);
+  Directory('${coreDir.path}/utils').createSync(recursive: true);
+  Directory('${coreDir.path}/widgets').createSync(recursive: true);
+
+  // Generate theme file
+  _createFile("${configDir.path}/theme", 'theme.dart', '''
+
+''');
+// Generate router file
+  _createFile("${configDir.path}/route", 'app_router.dart', '''
+
+''');
+
+// Generate colors
+  _createFile("${coreDir.path}/colors", 'app_colors.dart', '''
+import 'package:flutter/material.dart';
+class AppColors {
+    // add your custom colors here     
+     }
+''');
+
+// Generate local db service
+  _createFile("${coreDir.path}/database", 'local_db_service.dart', '''
+  class LocalDBService {
+ // your local database code goes here...
+  
+  }
+''');
+
+// Generate bloc observer file
+
+  _createFile("${coreDir.path}/utils", 'bloc_observer.dart', '''
+    
+import 'dart:developer';
+
+import 'package:flutter/foundation.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+class MyAppBlocObserver extends BlocObserver {
+  @override
+  void onTransition(Bloc bloc, Transition transition) {
+    log('onTransition: \$transition');
+    super.onTransition(bloc, transition);
+  }
+
+  @override
+  void onEvent(Bloc bloc, Object? event) {
+    log('OnEvent: \$event');
+    super.onEvent(bloc, event);
+  }
+
+  @override
+  void onCreate(BlocBase bloc) {
+    super.onCreate(bloc);
+    debugPrint('onCreate: \${bloc.runtimeType}');
+  }
+
+  @override
+  void onError(BlocBase bloc, Object error, StackTrace stackTrace) {
+    super.onError(bloc, error, stackTrace);
+    debugPrint('onError: \${bloc.runtimeType}, \$error');
+  }
+}
+''');
 
   // Create Default Helper Files
   final helperDir = Directory('${libDir.path}/helpers');
@@ -67,4 +204,15 @@ void initProject() {
 ''');
 
   print('Configuration file created: initpro_config.yaml');
+}
+
+void _createFile(String dirPath, String fileName, String content) {
+  final file = File('$dirPath/$fileName');
+  file.writeAsString(content);
+  print('File created: $dirPath/$fileName');
+}
+
+String _capitalize(String input) {
+  if (input.isEmpty) return input;
+  return input[0].toUpperCase() + input.substring(1);
 }
