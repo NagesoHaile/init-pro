@@ -5,3 +5,7 @@
 - Added commands to initialize Flutter projects with clean architecture.
 - Feature-based folder structure generation.
 - Helper files creation.
+
+## 0.2.0
+- added feature to add dependencies to the project `pubspec.yaml`.
+
