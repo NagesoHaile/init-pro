@@ -1,2 +1,20 @@
-A sample command-line application with an entrypoint in `bin/`, library code
-in `lib/`, and example unit test in `test/`.
+# init_pro
+
+`init_pro` is a command-line tool to automate Flutter project boilerplate setup.
+
+## Features
+- Sets up clean architecture for your Flutter project.
+- Generates feature-based folder structures.
+- Adds common helper utilities.
+
+## Installation
+Activate the CLI tool using Dart:
+```bash
+dart pub global activate init_pro
+
+
+# Initialize a project
+init_pro init
+
+# Add a feature
+init_pro create_feature feature_name

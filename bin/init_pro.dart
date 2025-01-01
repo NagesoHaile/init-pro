@@ -1,4 +1,3 @@
-import 'package:init_pro/init_pro.dart' as init_pro;
 import 'dart:io';
 import 'package:args/args.dart';
 
@@ -35,7 +34,7 @@ void main(List<String> arguments) {
     print('Error: $e');
     print('Use --help for usage instructions.');
   }
-  print('${init_pro.success()}!');
+  // print('${init_pro.success()}!');
 }
 
 void _handleInitCommand(ArgResults args) {
