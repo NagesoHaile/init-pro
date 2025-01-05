@@ -19,3 +19,6 @@
 
 ## 0.4.0+1
 - Theme boilerplate code added.
+
+## 0.4.0+2
+- bug fix.
