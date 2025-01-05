@@ -1,5 +1,30 @@
 import 'dart:io';
+import 'package:args/command_runner.dart';
+
 import '../commands/add_dependencies.dart';
+
+class InitCommand extends Command {
+  @override
+  String get description =>
+      'Initialize the Flutter project with default configurations';
+
+  @override
+  String get name => 'init';
+
+  @override
+  String get usage => '''
+    Initialize the project with:
+  - Clean architecture setup
+  - Core and helper configurations
+  - Predefined dependencies setup (flutter_bloc, get_it, etc.)
+  ''';
+
+  @override
+  Future<void> run() async {
+    print('Initializing project...');
+    initProject();
+  }
+}
 
 void initProject() async {
   final currentDir = Directory.current;
@@ -59,8 +84,8 @@ FutureOr<void> main() async {
   appFile.writeAsStringSync('''
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'core/theme/theme.dart';
-import 'router.dart';
+import 'package:brave/config/theme/theme.dart';
+import 'config/route/app_router.dart';
 
 
 class App extends StatelessWidget  {
@@ -68,9 +93,9 @@ class App extends StatelessWidget  {
 
   @override
   Widget build(BuildContext context){
-    return Material.router(
-      dartTheme: Style.dark,
-      theme: Style.light,
+    return MaterialApp.router(
+      darkTheme: darkTheme,
+      theme: lightTheme,
       routerConfig:router,
       debugShowCheckedModeBanner: false,
     );
@@ -124,15 +149,43 @@ class App extends StatelessWidget  {
 ''');
 // Generate router file
   _createFile("${configDir.path}/route", 'app_router.dart', '''
+     import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
+GlobalKey<NavigatorState> _rootNavigatorKey = GlobalKey<NavigatorState>();
+GlobalKey<NavigatorState> _shellNavigatorKey = GlobalKey<NavigatorState>();
+
+GoRouter router = GoRouter(
+debugLogDiagnostics: true,
+navigatorKey: _rootNavigatorKey,
+initialLocation: '/',
+  routes: [
+  
+  ],
+);
 ''');
 
 // Generate colors
   _createFile("${coreDir.path}/colors", 'app_colors.dart', '''
 import 'package:flutter/material.dart';
 class AppColors {
-    // add your custom colors here     
-     }
+// replace these colors with your own colors 
+// you can customize the [names] as you want 
+static const Color primaryColor = Color(0xFF16423C);
+static const Color secondaryColor = Color(0xFF6A9C89); 
+static const Color tertiaryColor = Color(0xFFC4DAD2);
+static const Color cardBackgroundColor = Color(0xFF031634);
+static const Color cardBackgroundColor = Color(0xFF031634);
+static const Color primaryLight = Color(0xFFFBF8EF);
+static const Color blackColor = Color(0xFF000f26);
+static const Color appRedColor = Color(0xFFA04747);
+static const Color whiteAppColor = Color(0xFFFFFFFF);
+static const Color dark = Color(0xFF262626);
+static const darkGrey = Color(0xFF686868);
+static const lightGrey = Color(0xFFE0E0E0);
+static const Color disabled = Color(0xFFC7C8CC);
+static const Color splashBackgroundColor = Color(0XFFf1efe7);
+}
 ''');
 
 // Generate local db service
@@ -185,22 +238,22 @@ class MyAppBlocObserver extends BlocObserver {
 
   final apiHelper = File('${helperDir.path}/api_helper.dart');
   apiHelper.writeAsString('''
-     class ApiHelper {
-      // Your API helper methods here
-     }
+class ApiHelper {
+// Your API helper methods here
+}
 ''');
 
   print('Helper file created: lib/helpers/api_helper.dart');
 
   final validators = File('${helperDir.path}/validators.dart');
   validators.writeAsString('''
-    class Validators {
-      static String? validateEmail(String email){
-        if(email.isEmpty) return 'Email is required.';
-         final regex = RegExp(r'^\\S+@\\S+\\.\\S+\$');
-         return regex.hasMatch(email) ? null : 'Invalid email format';
-      }
-    }
+class Validators {
+  static String? validateEmail(String email) {
+    if (email.isEmpty) return 'Email is required.';
+    final regex = RegExp(r'^\S+@\S+\.\S+\$');
+    return regex.hasMatch(email) ? null : 'Invalid email format';
+  }
+}
 ''');
 
   print('Helper file created: lib/helpers/validators.dart');

@@ -1,5 +1,39 @@
 import 'dart:io';
+import 'package:args/command_runner.dart';
 import 'package:yaml/yaml.dart';
+
+class CreateFeatureCommand extends Command {
+  @override
+  String get description =>
+      'Generate boilerplate for a feature with clean architecture';
+
+  @override
+  String get name => 'create-feature';
+
+  @override
+  String get usage => '''
+Usage: init-pro create-feature <feature_name>
+Generate boilerplate for:
+  - Data layer (repositories, models, data sources)
+  - Domain layer (entities, use cases, repositories)
+  - Presentation layer (widgets, blocs)
+
+Example:
+  init-pro create-feature auth
+  ''';
+
+  @override
+  Future<void> run() async {
+    if (argResults == null || argResults!.rest.isEmpty) {
+      print('Error: Feature name is required.');
+      print(usage);
+      return;
+    }
+    final featureName = argResults!.rest[0];
+    print('Creating feature: $featureName...');
+    createFeature(featureName);
+  }
+}
 
 void createFeature(String featureName) {
   if (featureName.isEmpty) {
@@ -86,8 +120,7 @@ class ${_capitalize(featureName)}UseCase {
   }
 ''');
 
-  _createFile(
-      presentationDir.path, 'presentation/${featureName}_screen.dart', '''
+  _createFile(presentationDir.path, 'presentation/${featureName}_page.dart', '''
    // write your flutter code here.
 ''');
 }
