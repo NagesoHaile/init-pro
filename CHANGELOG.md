@@ -16,3 +16,6 @@
 - Commands improvements.
 - Bug fix.
 - Code boilerplate updated and some added.
+
+## 0.4.0+1
+- Theme boilerplate code added.
