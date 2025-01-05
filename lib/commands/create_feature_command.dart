@@ -12,14 +12,14 @@ class CreateFeatureCommand extends Command {
 
   @override
   String get usage => '''
-Usage: init-pro create-feature <feature_name>
+Usage: init_pro create-feature <feature_name>
 Generate boilerplate for:
   - Data layer (repositories, models, data sources)
   - Domain layer (entities, use cases, repositories)
   - Presentation layer (widgets, blocs)
 
 Example:
-  init-pro create-feature auth
+  init_pro create-feature auth
   ''';
 
   @override

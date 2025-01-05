@@ -21,9 +21,6 @@ Commands:
 Examples:
   dart pub run init_pro init
   dart pub run init_pro create-feature auth
-
-
-For more information, run `init-pro <command> --help`
     ''',
   )
     ..addCommand(InitCommand())
