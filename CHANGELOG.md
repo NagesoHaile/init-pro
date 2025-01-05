@@ -11,3 +11,8 @@
 
 ## 0.3.0
 - documentation update.
+
+## 0.4.0
+- Commands improvements.
+- Bug fix.
+- Code boilerplate updated and some added.
