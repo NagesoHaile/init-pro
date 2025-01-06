@@ -25,7 +25,7 @@ flutter pub add dev:init_pro
  Run this command to activate the CLI tool:
 
  ```bash
- dart pub run global activate init_pro
+dart pub run global activate init_pro
  ```
 
 ## Or manually add it to your `pubspec.yaml:`
@@ -36,7 +36,7 @@ dev_dependencies:
 ```
  ## Then run this command
  ```bash 
- flutter pub get
+flutter pub get
 ```
 
 
@@ -46,51 +46,53 @@ Run init_pro commands in your Flutter project directory:
 
 ## Commands
  #### Initialize Clean Architecture
-
- ```bash
- dart pub run init_pro init
-```
 Sets up a clean architecture folder structure with data, domain, and presentation layers.
 
-  #### Generate Feature
-
-```bash
-  dart pub run init_pro create-feature <feature-name>
+ ```bash
+dart pub run init_pro init
 ```
+
+#### Generate Feature
 Generates a new feature with the three-layer architecture and required files.
 
+```bash
+dart pub run init_pro create-feature <feature-name>
+```
+
 #### Add Component
+Generates a common Flutter component such as buttons, dialogs etc.
 
 ```bash
 dart pub run init_pro add-component <component-name>
 ```
-Generates a common Flutter component such as buttons, dialogs etc.
 
 #### Show Help
+Displays help and usage information.
+
 ```bash
 dart pub run init_pro --help
 ```
-Displays help and usage information.
 
 
 ## Example Workflow
 
 ### 1. Initialize Project
-    Start by setting up the clean architecture for your Flutter project
+Start by setting up the clean architecture for your Flutter project
   ```bash
 dart pub run init_pro init
   ```
 ### 2. Add a New Feature
-    Generate a new feature folder with three-layer architecture:
-  ```bash
+Generate a new feature folder with three-layer architecture:
+
+```bash
 dart pub run init_pro create-feature authentication
-  ```
+```
 ### 3. Generate a Reusable Component
+Add a prebuilt and customizable Flutter component like a button or text field:
 
 ```bash
 dart pub run init_pro add-component elevated-button
  ```
-Add a prebuilt and customizable Flutter component like a button or text field:
 
    
 

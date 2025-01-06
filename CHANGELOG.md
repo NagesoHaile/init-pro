@@ -46,5 +46,11 @@
 
 ## 0.4.0+4
  - Documentation update
+## 0.4.0+4
+ - Documentation error fix.
+
 ## 0.4.0+6
- - Documentation update
+ - Documentation update.
+
+## 0.4.0+7
+ - Minor bug fix.
