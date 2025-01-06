@@ -19,7 +19,7 @@
 To use `init_pro`, add it to your Flutter project's dev dependencies:
 
 ```bash
-flutter pub add:dev init_pro
+flutter pub add dev:init_pro
 ```
 ### Global activation
  Run this command to activate the CLI tool:
