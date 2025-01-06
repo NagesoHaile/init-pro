@@ -43,3 +43,7 @@
 ### Notes
  - This release focuses on making UI components generation more  developer-friendly and efficient.
  - It simplifies repetitive tasks by automating the creation of commonly used UI components.
+
+
+ ## 0.4.0+3 
+ - Documentation update
