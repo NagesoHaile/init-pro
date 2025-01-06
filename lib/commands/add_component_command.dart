@@ -32,10 +32,20 @@ import 'package:init_pro/commands/components/slider.dart';
 import 'package:init_pro/commands/components/tab_bar.dart';
 import 'package:init_pro/commands/components/text_button.dart';
 
+/// Command to generate reusable boilerplate code for various Flutter components
+///
+/// The `AddComponentCommand` allows users to quickly generate boilerplate code
+/// for common Flutter widgets, such as `AlertDialog`, `Card`, `Checkbox`, and others.
+/// These components are added to the `lib/core/widgets` directory of the project.
+///
+/// Usage example:
+/// ```bash
+/// init_pro add-component elevated-button
+/// ```
 class AddComponentCommand extends Command {
   @override
   String get description =>
-      'Adds reusable boilerplate code of a component[Widgets]';
+      'Adds reusable boilerplate code of a component (Widget) to the project.';
 
   @override
   String get name => 'add-component';
@@ -51,17 +61,61 @@ Example:
 
   @override
   Future<void> run() async {
+    // Check if the user provided a component name
     if (argResults == null || argResults!.rest.isEmpty) {
       print('Error: Component name is required.');
       print(usage);
       return;
     }
+
+    // Get the component name from the command arguments
     final componentName = argResults!.rest[0];
     print('Generating component: $componentName...');
+
+    // Generate the requested component
     createComponent(componentName);
   }
 }
 
+/// Creates the specified Flutter component by calling the appropriate function
+///
+/// The function maps the provided component name to a corresponding method,
+/// which generates boilerplate code for that component. If the component is not
+/// supported, an error message is displayed.
+///
+/// Supported components:
+/// - app-bar
+/// - alert-dialog
+/// - animated-container
+/// - badge
+/// - bottom-navigation-bar
+/// - bottom-sheet
+/// - card
+/// - checkbox
+/// - chip
+/// - circle-avatar
+/// - circular-progress-indicator
+/// - linear-progress-indicator
+/// - outline-button
+/// - custom-scroll-view
+/// - text-field
+/// - toast
+/// - dropdown-button
+/// - elevated-button
+/// - fade-transition
+/// - scale-transition
+/// - hero
+/// - grid-tile
+/// - grid-view
+/// - list-tile
+/// - list-view
+/// - popup-menu-button
+/// - radio-button
+/// - search-field
+/// - shimmer
+/// - slider
+/// - tab-bar
+/// - text-button
 void createComponent(String componentName) {
   switch (componentName.toLowerCase()) {
     case 'app-bar':
