@@ -76,23 +76,23 @@ Displays help and usage information.
 ## Example Workflow
 
 ### 1. Initialize Project
-    Start by setting up the clean architecture for your Flutter project:
-
-    ```bash
-    dart pub run init_pro init
-    ```
+    Start by setting up the clean architecture for your Flutter project
+  ```bash
+dart pub run init_pro init
+  ```
 ### 2. Add a New Feature
     Generate a new feature folder with three-layer architecture:
-
-    ```bash
-     dart pub run init_pro create-feature authentication
-    ```
+  ```bash
+dart pub run init_pro create-feature authentication
+  ```
 ### 3. Generate a Reusable Component
-     Add a prebuilt and customizable Flutter component like a button or text field:
 
-    ```bash
-    dart pub run init_pro add-component elevated-button
-    ```
+```bash
+dart pub run init_pro add-component elevated-button
+ ```
+Add a prebuilt and customizable Flutter component like a button or text field:
+
+   
 
 ## Contributing
 We welcome contributions to `init_pro`! Please fork the repository and create a pull request for any new features or fixes.
