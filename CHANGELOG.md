@@ -22,3 +22,24 @@
 
 ## 0.4.0+2
 - bug fix.
+
+## 0.4.0+3 - Jan 06,2025
+
+### New Features
+- **Common Components/widgets Generations**:
+    -Added support for generating reusable UI components view CLI commands:
+        - `ElevatedButton`
+        - `TextButton`
+        - `SearchField`
+        - `Checkbox`
+        - `BottomNavigationBar`
+        - `CustomAppBar`
+        - `Progress Indicators (Circular & Linear)`
+        - `Hero`
+        - +25 more components
+### Improvements
+- Enhanced CLI structure to support new commands seamlessly.
+
+### Notes
+ - This release focuses on making UI components generation more  developer-friendly and efficient.
+ - It simplifies repetitive tasks by automating the creation of commonly used UI components.

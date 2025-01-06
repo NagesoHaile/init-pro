@@ -1,4 +1,5 @@
 import 'package:args/command_runner.dart';
+import 'package:init_pro/commands/add_component_command.dart';
 import 'package:init_pro/commands/init_command.dart';
 import 'package:init_pro/commands/create_feature_command.dart';
 
@@ -15,14 +16,16 @@ Usage:
 Commands:
   init             Initialize the Flutter project with default configurations
   create-feature   Generate boilerplate for a feature with clean architecture
-
+  add-component    Generate a reusable & customizable component.
+  
 Examples:
   dart pub run init_pro init
   dart pub run init_pro create-feature auth
     ''',
   )
     ..addCommand(InitCommand())
-    ..addCommand(CreateFeatureCommand());
+    ..addCommand(CreateFeatureCommand())
+    ..addCommand(AddComponentCommand());
 
   // Run the command runner and handle exceptions
   runner.run(arguments).catchError((error) {

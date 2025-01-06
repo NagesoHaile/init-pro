@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:args/command_runner.dart';
 
 import '../commands/add_dependencies.dart';
+import '../utils/file_creator.dart';
 
 class InitCommand extends Command {
   @override
@@ -83,7 +84,6 @@ FutureOr<void> main() async {
 
   appFile.writeAsStringSync('''
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:brave/config/theme/theme.dart';
 import 'config/route/app_router.dart';
 
@@ -106,7 +106,7 @@ class App extends StatelessWidget  {
 
   print('app_router.dart file created successfully.');
   // add dependency_injector.dart file
-  _createFile(libDir.path, "dependency_injector.dart", '''
+  createFile(libDir.path, "dependency_injector.dart", '''
     // if you want to use this code, please first add 
     // get_it package to your project by running
     // flutter pub add get_it
@@ -144,7 +144,7 @@ class App extends StatelessWidget  {
   Directory('${coreDir.path}/widgets').createSync(recursive: true);
 
   // Generate theme file
-  _createFile("${configDir.path}/theme", 'theme.dart', '''
+  createFile("${configDir.path}/theme", 'theme.dart', '''
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -442,7 +442,7 @@ final textTheme = TextTheme(
 
 ''');
 // Generate router file
-  _createFile("${configDir.path}/route", 'app_router.dart', '''
+  createFile("${configDir.path}/route", 'app_router.dart', '''
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -460,7 +460,7 @@ initialLocation: '/',
 ''');
 
 // Generate colors
-  _createFile("${coreDir.path}/colors", 'app_colors.dart', '''
+  createFile("${coreDir.path}/colors", 'app_colors.dart', '''
 import 'package:flutter/material.dart';
 class AppColors {
 // replace these colors with your own colors 
@@ -468,7 +468,6 @@ class AppColors {
 static const Color primaryColor = Color(0xFF16423C);
 static const Color secondaryColor = Color(0xFF6A9C89); 
 static const Color tertiaryColor = Color(0xFFC4DAD2);
-static const Color cardBackgroundColor = Color(0xFF031634);
 static const Color cardBackgroundColor = Color(0xFF031634);
 static const Color primaryLight = Color(0xFFFBF8EF);
 static const Color blackColor = Color(0xFF000f26);
@@ -483,7 +482,7 @@ static const Color splashBackgroundColor = Color(0XFFf1efe7);
 ''');
 
 // Generate local db service
-  _createFile("${coreDir.path}/database", 'local_db_service.dart', '''
+  createFile("${coreDir.path}/database", 'local_db_service.dart', '''
   class LocalDBService {
  // your local database code goes here...
   
@@ -492,7 +491,7 @@ static const Color splashBackgroundColor = Color(0XFFf1efe7);
 
 // Generate bloc observer file
 
-  _createFile("${coreDir.path}/utils", 'bloc_observer.dart', '''
+  createFile("${coreDir.path}/utils", 'bloc_observer.dart', '''
     
 import 'dart:developer';
 
@@ -560,10 +559,4 @@ class Validators {
 ''');
 
   print('Configuration file created: initpro_config.yaml');
-}
-
-void _createFile(String dirPath, String fileName, String content) {
-  final file = File('$dirPath/$fileName');
-  file.writeAsString(content);
-  print('File created: $dirPath/$fileName');
 }
