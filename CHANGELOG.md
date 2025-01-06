@@ -47,3 +47,5 @@
 
  ## 0.4.0+4
  - Documentation update
+## 0.4.0+5
+ - Documentation update
